@@ -1,13 +1,13 @@
 package com.canby.spring.web.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -16,7 +16,17 @@ import java.util.List;
 @Component("offersDao")
 public class OfferDAO {
 
-    private JdbcTemplate jdbcTemplate;
+    private NamedParameterJdbcTemplate jdbcTemplate;
+    private RowMapper<Offer> offerRowMapper = (resultSet, i) -> {
+        Offer newOffer = new Offer();
+
+        newOffer.setEmail(resultSet.getString("email"));
+        newOffer.setName(resultSet.getString("name"));
+        newOffer.setId(resultSet.getInt("id"));
+        newOffer.setOfferText(resultSet.getString("offer_text"));
+
+        return newOffer;
+    };
 
     public OfferDAO() {
         System.out.println("Loaded offersDAO");
@@ -24,22 +34,28 @@ public class OfferDAO {
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
-        this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.jdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
     public List<Offer> getOffers() {
-        return jdbcTemplate.query("select * from offer", new RowMapper<Offer>() {
-            @Override
-            public Offer mapRow(ResultSet resultSet, int i) throws SQLException {
-                Offer newOffer = new Offer();
+        return jdbcTemplate.query("select * from offer", offerRowMapper);
+    }
 
-                newOffer.setEmail(resultSet.getString("email"));
-                newOffer.setName(resultSet.getString("name"));
-                newOffer.setId(resultSet.getInt("id"));
-                newOffer.setOfferText(resultSet.getString("offer_text"));
+    public Offer getOffer(int id) {
+        MapSqlParameterSource params = new MapSqlParameterSource("id", id);
 
-                return newOffer;
-            }
-        });
+        return jdbcTemplate.queryForObject("select * from offer where id_old = :id", params, offerRowMapper);
+    }
+
+    public boolean delete(int id) {
+        MapSqlParameterSource params = new MapSqlParameterSource("id", id);
+
+        return jdbcTemplate.update("DELETE FROM offer WHERE id_old = :id", params) == 1;
+    }
+
+    public boolean create(Offer offer) {
+        BeanPropertySqlParameterSource params = new BeanPropertySqlParameterSource(offer);
+
+        return jdbcTemplate.update("INSERT INTO offer (name, email, offer_text) VALUES (:name, :email, :offerText)", params) == 1;
     }
 }

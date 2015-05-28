@@ -23,4 +23,16 @@ public class OffersService {
     public List<Offer> getCurrent() {
         return offerDAO.getOffers();
     }
+
+    public Offer getOffer(int id) {
+        return offerDAO.getOffer(id);
+    }
+
+    public boolean delete(int id) {
+        return offerDAO.delete(id);
+    }
+
+    public void create(Offer offer) {
+        offerDAO.create(offer);
+    }
 }

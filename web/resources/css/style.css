@@ -17,3 +17,13 @@ textarea {
     text-align: right;
     vertical-align: top;
 }
+
+.error {
+    font-size: small;
+    color: red;
+}
+
+table.offers {
+    padding: 10px;
+    border: 1px solid gray;
+}

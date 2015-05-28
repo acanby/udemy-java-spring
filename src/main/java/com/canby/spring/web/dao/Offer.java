@@ -1,7 +1,8 @@
 package com.canby.spring.web.dao;
 
+import com.canby.spring.web.annotations.ValidEmail;
+
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
@@ -12,14 +13,32 @@ public class Offer {
     int id;
 
     @NotNull
-    @Pattern(regexp = "\\w+@\\w+\\.\\w+")
+    @ValidEmail
     String email;
 
     @Size(min = 3, max = 20, message = "You need a name between 3 and 20 chars")
     String name;
 
-    @Size(min = 20, max = 3000)
+    @Size(min = 20, max = 3000, message = "Provide some offer text")
     String offerText;
+
+    public Offer() {
+    }
+
+    public Offer(String name, String email, String offerText) {
+        this.email = email;
+        this.name = name;
+        this.offerText = offerText;
+    }
+
+    public Offer(int id, String name, String email, String offerText) {
+        this.id = id;
+        this.email = email;
+        this.name = name;
+        this.offerText = offerText;
+    }
+
+
 
     public int getId() {
         return id;
