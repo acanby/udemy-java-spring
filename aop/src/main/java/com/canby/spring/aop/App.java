@@ -1,7 +1,6 @@
 package com.canby.spring.aop;
 
 import com.canby.spring.aop.camera.Camera;
-import com.canby.spring.aop.camera.accessories.Lens;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -9,19 +8,12 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
  */
 public class App {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         try (ClassPathXmlApplicationContext context =
                         new ClassPathXmlApplicationContext("beans.xml")) {
 
             Camera camera = (Camera) context.getBean("camera");
-            Lens lens = (Lens) context.getBean("lens");
-
             camera.snap();
-            camera.snap(1000);
-            camera.snap("Wollongong Harbour");
-            camera.snapNightMode();
-
-            lens.zoom(100);
         }
     }
 }

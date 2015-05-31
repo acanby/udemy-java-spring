@@ -1,9 +1,7 @@
 package com.canby.spring.aop;
 
-import org.aspectj.lang.annotation.After;
-import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
+import org.aspectj.lang.ProceedingJoinPoint;
+import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,29 +14,34 @@ public class Logger {
     @Pointcut("execution(* com.canby.spring.aop.camera.Camera.*(..))")
     private void allSnaps() {}
 
-    @Pointcut("execution(* com.canby.spring.aop.camera.Camera.snap(String))")
-    private void snapsWithStrings() {}
-
-    @Pointcut("execution(* com.canby.spring.aop.camera.accessories.*.*(..))")
-    private void accessories() {}
-
     @Before("allSnaps()")
-    public void aboutToTakePhoto() {
-        System.out.println("About to take photo...");
+    public void beforeAdvice() {
+        System.out.println("Before advice...");
     }
 
-    @Before("snapsWithStrings()")
-    public void aboutToTakePhotoWithName() {
-        System.out.println("About to take photo with name...");
+    @After("allSnaps()")
+    public void afterAdvice() {
+        System.out.println("After advice... ");
     }
 
-    @After("snapsWithStrings()")
-    public void afterTakePhotoWithName() {
-        System.out.println("After taking a photo with name...");
+    @AfterReturning("allSnaps()")
+    public void afterReturningAdvice() {
+        System.out.println("After returning advice... ");
     }
 
-    @Before("accessories()")
-    public void aopRelatedAction() {
-        System.out.println("Accessories related action");
+    @AfterThrowing("allSnaps()")
+    public void afterThrowingAdvice() {
+        System.out.println("After throwing advice... ");
+    }
+
+    @Around("allSnaps()")
+    public void aroundAdvice(ProceedingJoinPoint p) {
+        System.out.println("Around advice (before)... ");
+        try {
+            p.proceed();
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        }
+        System.out.println("Around advice (after)... ");
     }
 }
