@@ -1,0 +1,29 @@
+.formtable {
+    width: 400px;
+    padding: 10px;
+    border: 1px solid blue;
+}
+
+input[type=text] {
+    width: 250px;
+}
+
+textarea {
+    width: 250px;
+    height: 400px;
+}
+
+.label {
+    text-align: right;
+    vertical-align: top;
+}
+
+.error {
+    font-size: small;
+    color: red;
+}
+
+table.offers {
+    padding: 10px;
+    border: 1px solid gray;
+}
