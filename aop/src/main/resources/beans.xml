@@ -1,15 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
-    <bean class="com.canby.spring.aop.Camera" id="camera" />
-    <bean class="com.canby.spring.aop.Logger" id="logger" />
+    <context:component-scan base-package="com.canby.spring.aop" />
+    <context:annotation-config />
 
-    <aop:config>
-        <aop:pointcut id="camerasnap" expression="execution(void com.canby.spring.aop.Camera.snap())" />
-        <aop:aspect id="loggerAspect" ref="logger">
-            <aop:before pointcut-ref="camerasnap" method="aboutToTakePhoto"/>
-        </aop:aspect>
-    </aop:config>
+    <aop:aspectj-autoproxy />
 </beans>
