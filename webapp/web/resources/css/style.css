@@ -4,7 +4,8 @@
     border: 1px solid blue;
 }
 
-input[type=text] {
+input[type=text],
+input[type=password] {
     width: 250px;
 }
 
