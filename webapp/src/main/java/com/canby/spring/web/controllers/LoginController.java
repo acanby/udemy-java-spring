@@ -45,6 +45,12 @@ public class LoginController {
 
         user.setEnabled(true);
         user.setAuthority("user");
+
+        if (usersService.exists(user.getUsername())) {
+            bindingResult.rejectValue("username", "user.username", "Username taken! Try another.");
+            return "newAccount";
+        }
+
         usersService.create(user);
 
         return "accountCreated";
