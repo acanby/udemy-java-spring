@@ -1,12 +1,27 @@
 package com.canby.spring.web.dao;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
 /**
  * Created by acanby on 6/07/2015.
  */
 public class User {
+    @NotNull(message = "Can't have an empty username")
+    @Pattern(regexp = "^\\w{8,15}$", message = "Username must be alphanumeric, and between 8-15 characters")
     private String username;
+
+    @NotNull
+    @Length(min = 8, max = 60)
+    @Pattern(regexp = "\\w{8,60}", message = "Password must be 8-60 chars")
     private String password;
+
+    @Email
     private String email;
+
     private Boolean enabled;
     private String authority;
 
