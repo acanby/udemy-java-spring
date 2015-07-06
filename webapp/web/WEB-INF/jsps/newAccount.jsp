@@ -26,7 +26,7 @@
             <td class="label">Password:</td><td><form:input name="password" type="text" path="password" /><br/><form:errors path="password" cssClass="error"/></td>
         </tr>
         <tr>
-            <td class="label">Confirm Password:</td><td><input name="password" type="password" /><br/><form:errors path="password" cssClass="error"/></td>
+            <td class="label">Confirm Password:</td><td><input name="passwordConfirm" type="password" /><br/><form:errors path="password" cssClass="error"/></td>
         </tr>
         <tr>
             <td>&nbsp;</td><td><input name="Create" type="submit" /></td>

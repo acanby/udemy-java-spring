@@ -1,7 +1,7 @@
 package com.canby.spring.web.service;
 
 import com.canby.spring.web.dao.Offer;
-import com.canby.spring.web.dao.OfferDAO;
+import com.canby.spring.web.dao.OfferDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +13,10 @@ import java.util.List;
 @Service("offersService")
 public class OffersService {
 
-    private final OfferDAO offerDAO;
+    private final OfferDao offerDAO;
 
     @Autowired
-    public OffersService(OfferDAO offerDAO) {
+    public OffersService(OfferDao offerDAO) {
         this.offerDAO = offerDAO;
     }
 

@@ -14,7 +14,7 @@ import java.util.List;
  * Created by acanby on 3/03/2015.
  */
 @Component("offersDao")
-public class OfferDAO {
+public class OfferDao {
 
     private NamedParameterJdbcTemplate jdbcTemplate;
     private RowMapper<Offer> offerRowMapper = (resultSet, i) -> {
@@ -28,7 +28,7 @@ public class OfferDAO {
         return newOffer;
     };
 
-    public OfferDAO() {
+    public OfferDao() {
         System.out.println("Loaded offersDAO");
     }
 
