@@ -19,7 +19,7 @@
     <p><a href="<c:url value="/j_spring_security_logout" />">Logout</a></p>
     </sec:authorize>
 
-    <sec:authorize access="hasRole('admin')">
+    <sec:authorize access="hasRole('ROLE_ADMIN')">
     <p><a href="<c:url value="/admin" />">Sneaky Admin Stuff</a></p>
     </sec:authorize>
 

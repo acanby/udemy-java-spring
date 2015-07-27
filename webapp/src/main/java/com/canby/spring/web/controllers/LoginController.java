@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by acanby on 1/06/2015.
@@ -44,7 +45,7 @@ public class LoginController {
         }
 
         user.setEnabled(true);
-        user.setAuthority("user");
+        user.setAuthority("ROLE_USER");
 
         if (usersService.exists(user.getUsername())) {
             bindingResult.rejectValue("username", "user.username", "Username taken! Try another.");
@@ -60,4 +61,13 @@ public class LoginController {
     public String showLogout() {
         return "loggedOut";
     }
+
+    @RequestMapping("/admin")
+    public String showAdmin(Model model) {
+        List<User> users = usersService.getAllUsers();
+        model.addAttribute("users", users);
+
+        return "admin";
+    }
+
 }
