@@ -22,4 +22,9 @@ public class HomeController {
         model.addAttribute("id", id);
         return "home";
     }
+
+    @RequestMapping("/admin")
+    public String showAdmin() {
+        return "admin";
+    }
 }
