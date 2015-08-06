@@ -10,10 +10,11 @@
 <html>
 <head>
     <title><tiles:insertAttribute name="title"/></title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css" type="text/css" />
 </head>
 <body>
-  <div><tiles:insertAttribute name="header" /></div>
-  <div><tiles:insertAttribute name="content" /></div>
-  <div><tiles:insertAttribute name="footer" /></div>
+  <div class="header"><tiles:insertAttribute name="header" /></div>
+  <div class="content"><tiles:insertAttribute name="content" /></div>
+  <div class="footer"><tiles:insertAttribute name="footer" /></div>
 </body>
 </html>

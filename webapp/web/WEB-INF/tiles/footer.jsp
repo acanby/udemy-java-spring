@@ -1,1 +1,1 @@
-<h5>footer goes here</h5>
+Created by Andrew Canby email@domain.com
